@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>数据爬取</title>
+<link rel="stylesheet" type="text/css" media="all" th:href="@{/css/bootstrap.min.css}" />
+<style type="text/css">
+	body {
+		margin-top: 20px;
+	}
+</style>
+</head>
+<body>
+	<div class="col-md-6">
+		<div class="col-sm-7">
+			<input class="form-control" type="text" name="movieUrl" />
+		</div>
+		<input class="btn btn-primary" id="execute" type="button" value="抓取数据" />
+	</div>
+</body>
+<script type="text/javascript" th:src="@{/js/jquery-1.11.1.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+<script type="text/javascript" th:inline="javascript">
+	$(document).ready(function(){
+		$("#execute").click(function(){
+			$.ajax({
+				url: "127.0.0.1:8080/api/execute",
+				method: "GET",
+				contentType: "application/json"
+				data:{
+					'movieUrl': $("input[name='movieUrl']").val()
+				},
+				async: true,
+				success: function(data){
+					alert("获取数据成功！");
+				},
+				error: function(e){
+					alert("获取数据失败！");
+				}
+			});
+		});
+	});
+</script>
+</html>
