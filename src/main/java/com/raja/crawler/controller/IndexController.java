@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.raja.crawler.common.JsonResult;
+import com.raja.crawler.common.ResponseEntity;
 
 @Controller
 public class IndexController {
@@ -38,8 +38,8 @@ public class IndexController {
 	
 	@RequestMapping(value = "/api/execute", method = RequestMethod.GET)
 	@ResponseBody
-	public JsonResult execute() {
-		JsonResult result = new JsonResult();
+	public ResponseEntity execute() {
+		ResponseEntity result = new ResponseEntity();
 		Connection connect = null;
 		Document doc;
 		
