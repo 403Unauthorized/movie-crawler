@@ -8,9 +8,9 @@ spring:
     druid:
       type: com.alibaba.druid.pool.DruidDataSource
       driverClassName: com.mysql.jdbc.Driver
-      url: jdbc:mysql://118.24.137.85/cinema?useUnicode=true&characterEncoding=urf8&useSSL=false
-      username: cinema
-      password: cinema@Centos7
+      url: jdbc:mysql://localhost:3306/db_cinema?useUnicode=true&characterEncoding=urf8&useSSL=false
+      username: root
+      password: Macos@2019
       initialSize: 10
       minIdle: 5
       maxActive: 30

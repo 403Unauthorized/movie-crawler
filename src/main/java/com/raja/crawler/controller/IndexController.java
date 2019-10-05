@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.raja.crawler.service.ApiService;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -11,6 +12,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,6 +30,9 @@ public class IndexController {
 	private static final String MAOYAN_URL = "https://maoyan.com";
 	
 	private static final String MAOYAN_FILMS_URL = "https://maoyan.com/films";
+
+	@Autowired
+	private ApiService service;
 	
 	@RequestMapping("/view/index")
 	public ModelAndView index() {
