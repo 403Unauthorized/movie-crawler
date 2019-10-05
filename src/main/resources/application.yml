@@ -36,7 +36,6 @@ spring:
     servlet:
       content-type: text/html
 
-mybatis:
-  config-location: classpath:mybatis/mybatis-config.xml
-  mapper-locations: classpath:mybatis/mappers/*.xml
+mybatis-plus:
+  mapper-locations: classpath:/mybatis/mapper/*.xml
         
