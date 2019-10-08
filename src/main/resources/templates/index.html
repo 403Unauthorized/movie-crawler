@@ -24,11 +24,15 @@
 	$(document).ready(function(){
 		$("#execute").click(function(){
 			$.ajax({
-				url: "127.0.0.1:8080/api/execute",
+				url: "localhost:8080/api/execute",
 				method: "GET",
-				contentType: "application/json"
+				contentType: "application/json",
 				data:{
 					'movieUrl': $("input[name='movieUrl']").val()
+				},
+				headers: {
+					"Access-Control-Allow-Origin": "*",
+					"Content-Type": "text/html"
 				},
 				async: true,
 				success: function(data){

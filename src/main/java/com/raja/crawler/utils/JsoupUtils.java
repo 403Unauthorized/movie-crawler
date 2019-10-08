@@ -1,6 +1,7 @@
 package com.raja.crawler.utils;
 
 import org.jsoup.Connection;
+import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 import java.util.HashMap;
@@ -25,7 +26,7 @@ public class JsoupUtils {
     }
 
     public static Document getDocument(String url) {
-        Connection connection = null;
+        Connection connection = Jsoup.connect(url);
         try {
             connection.headers(header);
             return connection.get();
