@@ -30,15 +30,12 @@ public class ApiService {
 
     private static final int LEADING_ACTORS_NUM = 5;
 
-    private final SqlSessionInstance sqlSessionInstance;
-
-    private SqlSession sqlSession;
-
     private Integer defaultOffset = 0;
 
-    public ApiService(SqlSessionInstance sqlSessionInstance) {
-        this.sqlSessionInstance = sqlSessionInstance;
-        this.sqlSession = this.sqlSessionInstance.getInstance();
+    private final MovieMapper movieMapper;
+
+    public ApiService(MovieMapper movieMapper) {
+        this.movieMapper = movieMapper;
     }
 
     public List<MovieInfo> crawlMovies(Document doc) {
@@ -61,7 +58,6 @@ public class ApiService {
             MovieInfo movie = movieInfo(MAOYAN_URL + movieUrl, score);
 
         }
-        sqlSession.rollback();
 
         return movies;
     }
@@ -146,15 +142,17 @@ public class ApiService {
 
         movie.setDirectors(setMovieCelebrities(directorList));
 
-        // 演员
-        Element actor = celebrityGroups.get(1);
-        Element actorListUl = actor.selectFirst("ul.celebrity-list");
-        Elements actorList = actorListUl.getElementsByTag("li");
+        if (celebrityGroups.size() > 1) {
+            // 演员
+            Element actor = celebrityGroups.get(1);
+            Element actorListUl = actor.selectFirst("ul.celebrity-list");
+            Elements actorList = actorListUl.getElementsByTag("li");
 
-        movie.setLeadingActors(setMovieCelebrities(actorList));
+            movie.setLeadingActors(setMovieCelebrities(actorList));
+        }
 
         log.info(movie.toString());
-        int count = sqlSession.getMapper(MovieMapper.class).insert(movie);
+        int count = movieMapper.insert(movie);
 
         log.info("数据添加：{} 条。", count);
 

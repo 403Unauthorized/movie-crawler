@@ -2,6 +2,7 @@ package com.raja.crawler.utils;
 
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
+import org.jsoup.helper.HttpConnection;
 import org.jsoup.nodes.Document;
 
 import java.util.HashMap;
@@ -15,6 +16,8 @@ public class JsoupUtils {
 
     private static final Map<String, String> header;
 
+    private static Connection connection;
+
     static {
         header = new HashMap<>();
         header.put("Host", "http://info.bet007.com");
@@ -26,7 +29,7 @@ public class JsoupUtils {
     }
 
     public static Document getDocument(String url) {
-        Connection connection = Jsoup.connect(url);
+        connection = Jsoup.connect(url);
         try {
             connection.headers(header);
             return connection.get();
